@@ -1,34 +1,19 @@
-const DAYS_OF_WEEK = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 const IDEAL_HOURS_PER_DAY = 8;
 
-const MY_SLEEP_HOURS = {
-  'Monday': 8,
-  'Tuesday': 6,
-  'Wednesday': 7,
-  'Thursday': 7,
-  'Friday': 8,
-  'Saturday': 6,
-  'Sunday': 5,
-};
-
-const getSleepHours = day => {
-  return MY_SLEEP_HOURS[day];
-};
-
-const getActualSleepHours = () => {
+const getActualSleepHours = (sleepHours) => {
   let hours = 0;
-  for(let day of DAYS_OF_WEEK) {
-    hours = hours + getSleepHours(day)
+  for(let day of Object.keys(sleepHours)) {
+    hours = hours + sleepHours[day]
   }
   return hours;
 }
 
 const getIdealSleepHours = () => {
-  return IDEAL_HOURS_PER_DAY * DAYS_OF_WEEK.length;
+  return IDEAL_HOURS_PER_DAY * 7;
 };
 
-const calculateSleepDebt = () => {
-  const actualSleepHours = getActualSleepHours();
+const calculateSleepDebt = (sleepHours) => {
+  const actualSleepHours = getActualSleepHours(sleepHours);
   const idealSleepHours = getIdealSleepHours();
 
   if (actualSleepHours < idealSleepHours) {
@@ -40,4 +25,17 @@ const calculateSleepDebt = () => {
   return 'You had the perfect amount of sleep';
 }
 
-console.log(calculateSleepDebt());
+
+/*******************************************/
+
+const MY_SLEEP_HOURS = {
+  'Monday': 8,
+  'Tuesday': 6,
+  'Wednesday': 7,
+  'Thursday': 7,
+  'Friday': 8,
+  'Saturday': 6,
+  'Sunday': 5,
+};
+
+console.log(calculateSleepDebt(MY_SLEEP_HOURS));
