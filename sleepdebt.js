@@ -1,16 +1,8 @@
 const IDEAL_HOURS_PER_DAY = 8;
 
-const getActualSleepHours = (sleepHours) => {
-  let hours = 0;
-  for(let day of Object.keys(sleepHours)) {
-    hours = hours + sleepHours[day]
-  }
-  return hours;
-}
+const getActualSleepHours = (sleepHours) => Object.keys(sleepHours).reduce((acc, key) => acc + sleepHours[key], 0)
 
-const getIdealSleepHours = () => {
-  return IDEAL_HOURS_PER_DAY * 7;
-};
+const getIdealSleepHours = () => IDEAL_HOURS_PER_DAY * 7;
 
 const calculateSleepDebt = (sleepHours) => {
   const actualSleepHours = getActualSleepHours(sleepHours);
