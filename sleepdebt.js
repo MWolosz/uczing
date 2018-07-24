@@ -1,42 +1,34 @@
 const DAYS_OF_WEEK = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const IDEAL_HOURS_PER_DAY = 8;
 
-const getSleepHours = day => {
-  switch(day) {
-    case 'Monday':
-      return 8;
-    case 'Tuesday':
-      return 6;
-    case 'Wednesday':
-      return 7;
-    case 'Thursday':
-      return 7;
-    case 'Friday':
-      return 8;
-    case 'Saturday':
-      return 6;
-    case 'Sunday':
-      return 5;
-    default:
-      throw new Error('Invalid day.')
-  }
+const MY_SLEEP_HOURS = {
+  'Monday': 8,
+  'Tuesday': 6,
+  'Wednesday': 7,
+  'Thursday': 7,
+  'Friday': 8,
+  'Saturday': 6,
+  'Sunday': 5,
 };
 
-const getActualSleepHours = (daysArray) => {
+const getSleepHours = day => {
+  return MY_SLEEP_HOURS[day];
+};
+
+const getActualSleepHours = () => {
   let hours = 0;
-  for(let day of daysArray) {
+  for(let day of DAYS_OF_WEEK) {
     hours = hours + getSleepHours(day)
   }
   return hours;
 }
 
 const getIdealSleepHours = () => {
-  const idealHours = 8;
-  const daysInWeek = 7;
-  return idealHours * daysInWeek;
+  return IDEAL_HOURS_PER_DAY * DAYS_OF_WEEK.length;
 };
 
 const calculateSleepDebt = () => {
-  const actualSleepHours = getActualSleepHours(DAYS_OF_WEEK);
+  const actualSleepHours = getActualSleepHours();
   const idealSleepHours = getIdealSleepHours();
 
   if (actualSleepHours < idealSleepHours) {
